@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/gradient"
+    tools:context=".HomeActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:text="@string/app_name2"
+        android:fontFamily="@font/cascadia_bold"
+        android:textColor="#3965FF"
+        android:textSize="30sp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:layout_height="?android:attr/actionBarSize"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/quote_bg"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        android:elevation="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_height="130dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="If it works don't touch it."
+            android:layout_marginStart="10dp"
+            android:textSize="20dp"
+            android:id="@+id/TV_Quote"
+            android:paddingEnd="20dp"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/cascadia"
+            android:textColor="@color/white"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/top_round_bg"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="6dp"
+            android:id="@+id/CARD_Compiler"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/icon_compiler"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Compiler"
+                        android:fontFamily="@font/cascadia_bold"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Execute your code"
+                        android:fontFamily="@font/cascadia"
+                        android:textSize="15sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="6dp"
+            android:id="@+id/CARD_Transpile"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/icon_translate"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Transpile"
+                        android:fontFamily="@font/cascadia_bold"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Converts code to another language"
+                        android:fontFamily="@font/cascadia"
+                        android:textSize="15sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="6dp"
+            android:id="@+id/CARD_Explain"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/icon_explain"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Explainer"
+                        android:fontFamily="@font/cascadia_bold"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Get detailed explanation for your code"
+                        android:fontFamily="@font/cascadia"
+                        android:textSize="15sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</LinearLayout>

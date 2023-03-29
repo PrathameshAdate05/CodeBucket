@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Code Bucket</string>
+    <string name="app_name2">&lt;Code Bucket/&gt;</string>
+    <string name="tagline">Simplify your coding journey with <b> Code Bucket! </b></string>
+    <string name="title_activity_compiler">CompilerActivity</string>
 </resources>
