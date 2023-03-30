@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -36,6 +37,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void getQuote(){
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Constants.Quotes_API, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

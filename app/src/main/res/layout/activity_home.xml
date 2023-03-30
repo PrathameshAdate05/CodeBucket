@@ -10,14 +10,14 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:text="@string/app_name2"
-        android:fontFamily="@font/cascadia_bold"
-        android:textColor="#3965FF"
-        android:textSize="30sp"
-        android:layout_marginHorizontal="10dp"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/alegreya_sc_bold"
         android:gravity="center_vertical"
-        android:layout_height="?android:attr/actionBarSize"/>
+        android:text="@string/app_name2"
+        android:textColor="#3965FF"
+        android:textSize="30sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,6 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:text="If it works don't touch it."
             android:layout_marginStart="10dp"
             android:textSize="20dp"
             android:id="@+id/TV_Quote"
@@ -89,7 +88,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:text="Execute your code"
+                        android:text="Executes your code."
                         android:fontFamily="@font/cascadia"
                         android:textSize="15sp"
                         android:layout_marginTop="5dp"
@@ -137,7 +136,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:text="Converts code to another language"
+                        android:text="Converts your code."
                         android:fontFamily="@font/cascadia"
                         android:textSize="15sp"
                         android:layout_marginTop="5dp"
@@ -186,7 +185,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:text="Get detailed explanation for your code"
+                        android:text="Expalins your code."
                         android:fontFamily="@font/cascadia"
                         android:textSize="15sp"
                         android:layout_marginTop="5dp"
