@@ -19,8 +19,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -131,10 +133,6 @@ public class CompilerActivity extends AppCompatActivity {
 
     // API request method
     public void compile(String code, String input){
-        if (code.equals(""))
-            showSnackBar("Please write some code...!");
-        else {
-
 
             customLoader.showCustomLoader(this);
             JSONObject payload = new JSONObject();
@@ -172,10 +170,9 @@ public class CompilerActivity extends AppCompatActivity {
 
                     try {
 
-                        boolean success = response.getBoolean("success");
-                        Log.d("PRATHAMESHADATE",String.valueOf(success));
 
-                        if (success){
+
+                        if (response.getString("error").isEmpty()){
                             setTextToOutputScreen(response.getString("output"));
                             Log.d("PRATHAMESHADATE",response.getString("output"));
                         }else {
@@ -196,8 +193,12 @@ public class CompilerActivity extends AppCompatActivity {
                 }
             });
 
+            int timeout = 32000;
+            RetryPolicy policy = new DefaultRetryPolicy(timeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            jsonObjectRequest.setRetryPolicy(policy);
+
             SingletonAPI.getInstance(this).addToRequestQueue(jsonObjectRequest);
-        }
+
     }
 
     private void showSnackBar(String message){
@@ -205,22 +206,31 @@ public class CompilerActivity extends AppCompatActivity {
     }
 
     public void showInputDialog(String code){
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        View view = layoutInflater.inflate(R.layout.input_dialog, null);
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setView(view);
 
-        final EditText editText = view.findViewById(R.id.ET_InputDialog);
-        alertDialog.setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String input = editText.getText().toString();
-                compile(code, input);
-            }
-        });
+        if (code.isEmpty())
+            showSnackBar("Please write some code...!");
+        else{
+            LayoutInflater layoutInflater = LayoutInflater.from(this);
+            View view = layoutInflater.inflate(R.layout.input_dialog, null);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setView(view);
 
-        AlertDialog showDialog = alertDialog.create();
-        showDialog.show();
+            final EditText editText = view.findViewById(R.id.ET_InputDialog);
+            alertDialog.setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    String input = editText.getText().toString();
+                    compile(code, input);
+                }
+            });
+
+            AlertDialog showDialog = alertDialog.create();
+            showDialog.show();
+        }
+
+
     }
+
+
 
 }
