@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/RL_Compiler"
+    tools:context=".Compiler.CompilerActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:id="@+id/AppBar_Compiler"
+        android:layout_height="?android:attr/actionBarSize">
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/Cimpiler_Title"
+                android:minHeight="?actionBarSize"
+                android:layout_marginStart="10dp"
+                android:textSize="25sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/alegreya_sc_bold"
+                android:text="Compiler"
+                />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:id="@+id/Compiler_Spinner"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/spinner_border"
+                android:layout_marginHorizontal="8dp"
+                android:layout_height="wrap_content"/>
+            
+        </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/AppBar_Compiler"
+        android:id="@+id/TBL_Compiler"
+        android:layout_height="wrap_content"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:id="@+id/ViewPager_Compiler"
+        android:layout_below="@id/TBL_Compiler"
+        android:layout_height="match_parent"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:layout_width="wrap_content"
+        app:icon="@drawable/icon_play"
+        android:text="Compile"
+        android:backgroundTint="#3965FF"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="30dp"
+        android:textAllCaps="false"
+        app:iconSize="35dp"
+        android:fontFamily="@font/cascadia"
+        android:textSize="18sp"
+        android:id="@+id/FAB_Compiler"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

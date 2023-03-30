@@ -3,4 +3,6 @@
     <string name="app_name2">&lt;Code Bucket/&gt;</string>
     <string name="tagline">Simplify your coding journey with <b> Code Bucket! </b></string>
     <string name="title_activity_compiler">CompilerActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

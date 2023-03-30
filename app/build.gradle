@@ -43,4 +43,10 @@ dependencies {
 
     // volley
     implementation 'com.android.volley:volley:1.2.1'
+
+    // editor
+    implementation 'io.github.Rosemoe.sora-editor:editor:0.8.4'
+
+    // editor languages
+    implementation 'io.github.Rosemoe.sora-editor:language-java:0.8.4'
 }

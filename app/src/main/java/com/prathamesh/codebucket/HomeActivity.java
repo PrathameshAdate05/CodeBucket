@@ -2,10 +2,12 @@ package com.prathamesh.codebucket;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.google.android.material.card.MaterialCardView;
+import com.prathamesh.codebucket.Compiler.CompilerActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -28,5 +30,9 @@ public class HomeActivity extends AppCompatActivity {
             TV_Quote.setText("If it works don't touch it.");
         else
             TV_Quote.setText(s);
+
+        Card_Compiler.setOnClickListener(view -> {
+            startActivity(new Intent(HomeActivity.this, CompilerActivity.class));
+        });
     }
 }
