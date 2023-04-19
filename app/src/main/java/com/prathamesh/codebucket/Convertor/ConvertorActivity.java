@@ -3,6 +3,9 @@ package com.prathamesh.codebucket.Convertor;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -13,13 +16,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.prathamesh.codebucket.Adapter.ConvertorViewPagerAdapter;
@@ -36,19 +38,19 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.github.rosemoe.sora.widget.CodeEditor;
-
 public class ConvertorActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
-    ExtendedFloatingActionButton FAB;
+    ExtendedFloatingActionButton FAB_Convert;
+    FloatingActionButton FAB_Copy;
     Spinner spinner;
     CustomLoader customLoader;
     String languageKey = "";
-
+    String code = "";
     RelativeLayout relativeLayout;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,9 +59,13 @@ public class ConvertorActivity extends AppCompatActivity {
         relativeLayout = findViewById(R.id.RL_Convertor);
         tabLayout = findViewById(R.id.TBL_Convertor);
         viewPager = findViewById(R.id.ViewPager_Convertor);
-        FAB = findViewById(R.id.FAB_Convertor);
+        FAB_Convert = findViewById(R.id.FAB_Convertor);
+        FAB_Copy = findViewById(R.id.FAB_Convertor_Copy);
         spinner = findViewById(R.id.Convertor_Spinner);
         customLoader = new CustomLoader();
+
+
+        FAB_Copy.setVisibility(View.GONE);
 
         // tablayout setup
         ConvertorViewPagerAdapter convertorViewPagerAdapter = new ConvertorViewPagerAdapter(getSupportFragmentManager());
@@ -95,12 +101,14 @@ public class ConvertorActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 if (position == 0) {
-                    FAB.setVisibility(View.VISIBLE);
+                    FAB_Convert.setVisibility(View.VISIBLE);
+                    FAB_Copy.setVisibility(View.GONE);
                     fabAnimation();
                 }
                 if (position == 1) {
                     tabLayout.getTabAt(1).removeBadge();
-                    FAB.setVisibility(View.GONE);
+                    FAB_Convert.setVisibility(View.GONE);
+                    FAB_Copy.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -110,15 +118,27 @@ public class ConvertorActivity extends AppCompatActivity {
             }
         });
 
+        // listener for copy button
+        FAB_Copy.setOnClickListener(view -> {
+            if (!code.equals("")){
+                ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText("CodeBucket", code);
+                clipboardManager.setPrimaryClip(clipData);
+                Toast.makeText(this, "Code Copied", Toast.LENGTH_SHORT).show();
+            }else
+                Toast.makeText(this, "Nothing to copy...", Toast.LENGTH_SHORT).show();
+           
+        });
+
     }
 
     private void fabAnimation() {
-        FAB.extend();
+        FAB_Convert.extend();
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                FAB.shrink();
+                FAB_Convert.shrink();
             }
         }, 3000);
     }
@@ -128,15 +148,14 @@ public class ConvertorActivity extends AppCompatActivity {
         ConvertorOutputFragment convertorOutputFragment = new ConvertorOutputFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.FL_Convertor_Output, convertorOutputFragment).commit();
         Bundle bundle = new Bundle();
-        bundle.putString("code",code);
+        bundle.putString("code", code);
         convertorOutputFragment.setArguments(bundle);
-//        CodeEditor codeEditor = findViewById(R.id.CodeEditor_Convertor_Output);
-//        codeEditor.setText(code);
-        Log.d("PRATHAMESHADATE","code setted");
+        Log.d("PRATHAMESHADATE", "code setted");
     }
 
-    public void convertCode(String code) {
-        if (code.isEmpty()) {
+    // main method which send a request to server for converting code   
+    public void convertCode(String inputCode) {
+        if (inputCode.isEmpty()) {
             showSnackBar("Please write some code...!");
         } else {
             customLoader.showCustomLoader(this, "Converting...");
@@ -162,7 +181,7 @@ public class ConvertorActivity extends AppCompatActivity {
                     break;
             }
 
-            String prompt = "##### Translate the below code into " + lang + "###\n" + code + "\n###";
+            String prompt = "##### Translate the below code into " + lang + "###\n" + inputCode + "\n###";
 
             try {
                 payload.put("model", "text-davinci-003");
@@ -185,7 +204,7 @@ public class ConvertorActivity extends AppCompatActivity {
                     try {
                         JSONArray jsonArrayResponse = response.getJSONArray("choices");
                         JSONObject res = jsonArrayResponse.getJSONObject(0);
-                        String code = res.getString("text");
+                        code = res.getString("text");
                         Log.d("PRATHAMESHADATE", code);
                         setCodeToOutputScreen(code);
                         tabLayout.getTabAt(1).getOrCreateBadge().setNumber(1);
@@ -236,4 +255,6 @@ public class ConvertorActivity extends AppCompatActivity {
     private void showSnackBar(String message) {
         Snackbar.make(relativeLayout, message, Snackbar.LENGTH_LONG).show();
     }
+
+
 }

@@ -14,13 +14,4 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:id="@+id/FAB_Convertor_Copy"
-            android:layout_gravity="end|bottom"
-            android:src="@drawable/icon_copy"
-            android:layout_margin="30dp"
-            app:fabCustomSize="65dp"
-            android:layout_height="wrap_content"/>
-
 </FrameLayout>
