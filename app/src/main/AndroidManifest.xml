@@ -14,6 +14,9 @@
         android:theme="@style/Theme.CodeBucket"
         tools:targetApi="31">
         <activity
+            android:name=".Convertor.ConvertorActivity"
+            android:exported="false" />
+        <activity
             android:name=".Compiler.CompilerActivity"
             android:exported="false" />
         <activity

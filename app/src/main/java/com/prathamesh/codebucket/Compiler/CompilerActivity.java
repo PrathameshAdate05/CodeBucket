@@ -134,7 +134,7 @@ public class CompilerActivity extends AppCompatActivity {
     // API request method
     public void compile(String code, String input){
 
-            customLoader.showCustomLoader(this);
+            customLoader.showCustomLoader(this, "Compiling...");
             JSONObject payload = new JSONObject();
 
             String lang = "";
@@ -169,8 +169,6 @@ public class CompilerActivity extends AppCompatActivity {
                 public void onResponse(JSONObject response) {
 
                     try {
-
-
 
                         if (response.getString("error").isEmpty()){
                             setTextToOutputScreen(response.getString("output"));

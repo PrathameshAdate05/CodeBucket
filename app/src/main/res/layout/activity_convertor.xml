@@ -2,13 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/RL_Compiler"
+    android:id="@+id/RL_Convertor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Compiler.CompilerActivity">
+    tools:context=".Convertor.ConvertorActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/AppBar_Compiler"
+        android:id="@+id/Appbar_Convertor"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize">
 
@@ -17,19 +17,19 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/Compiler_Title"
+                android:id="@+id/Convertor_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/alegreya_sc_bold"
                 android:gravity="center"
                 android:minHeight="?actionBarSize"
-                android:text="Compiler"
+                android:text="Convertor"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
 
             <Spinner
-                android:id="@+id/Compiler_Spinner"
+                android:id="@+id/Convertor_Spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -39,22 +39,23 @@
                 android:gravity="center" />
 
         </RelativeLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/TBL_Compiler"
+        android:id="@+id/TBL_Convertor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/AppBar_Compiler" />
+        android:layout_below="@id/Appbar_Convertor" />
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/ViewPager_Compiler"
+        android:id="@+id/ViewPager_Convertor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/TBL_Compiler" />
+        android:layout_below="@id/TBL_Convertor" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/FAB_Compiler"
+        android:id="@+id/FAB_Convertor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -65,10 +66,10 @@
         android:layout_marginBottom="30dp"
         android:backgroundTint="#3965FF"
         android:fontFamily="@font/cascadia"
-        android:text="Compile"
+        android:text="Convert"
         android:textAllCaps="false"
         android:textSize="18sp"
-        app:icon="@drawable/icon_play"
+        app:icon="@drawable/icon_convert"
         app:iconSize="35dp" />
 
 </RelativeLayout>

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.google.android.material.card.MaterialCardView;
 import com.prathamesh.codebucket.Compiler.CompilerActivity;
+import com.prathamesh.codebucket.Convertor.ConvertorActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -33,6 +34,10 @@ public class HomeActivity extends AppCompatActivity {
 
         Card_Compiler.setOnClickListener(view -> {
             startActivity(new Intent(HomeActivity.this, CompilerActivity.class));
+        });
+
+        Card_Code_Convertor.setOnClickListener(view -> {
+            startActivity(new Intent(HomeActivity.this, ConvertorActivity.class));
         });
     }
 }

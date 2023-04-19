@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/alegreya_sc"
         android:text="Compiling..."
+        android:id="@+id/Custom_Loader_Title"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="25sp" />
