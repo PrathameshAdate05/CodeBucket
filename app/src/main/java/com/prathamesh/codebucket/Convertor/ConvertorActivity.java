@@ -79,7 +79,6 @@ public class ConvertorActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 languageKey = Constants.LANGUAGES[i];
-                Toast.makeText(ConvertorActivity.this, languageKey, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -153,7 +152,7 @@ public class ConvertorActivity extends AppCompatActivity {
         Log.d("PRATHAMESHADATE", "code setted");
     }
 
-    // main method which send a request to server for converting code   
+    // main method which send a request to server for converting code
     public void convertCode(String inputCode) {
         if (inputCode.isEmpty()) {
             showSnackBar("Please write some code...!");
@@ -197,7 +196,7 @@ public class ConvertorActivity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
 
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Constants.Convertor_API, payload, new Response.Listener<JSONObject>() {
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Constants.OpenAI_API, payload, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
 
@@ -230,22 +229,6 @@ public class ConvertorActivity extends AppCompatActivity {
                 }
             };
 
-//            jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
-//                @Override
-//                public int getCurrentTimeout() {
-//                    return 50000;
-//                }
-//
-//                @Override
-//                public int getCurrentRetryCount() {
-//                    return 50000;
-//                }
-//
-//                @Override
-//                public void retry(VolleyError error) throws VolleyError {
-//
-//                }
-//            });
 
             SingletonAPI.getInstance(this).addToRequestQueue(jsonObjectRequest);
         }

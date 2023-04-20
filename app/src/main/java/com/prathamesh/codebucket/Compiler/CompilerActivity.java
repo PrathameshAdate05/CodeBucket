@@ -75,7 +75,6 @@ public class CompilerActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 languageKey = Constants.LANGUAGES[i];
-                Toast.makeText(CompilerActivity.this, languageKey, Toast.LENGTH_SHORT).show();
             }
 
             @Override

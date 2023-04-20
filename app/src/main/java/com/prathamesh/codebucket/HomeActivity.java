@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.google.android.material.card.MaterialCardView;
 import com.prathamesh.codebucket.Compiler.CompilerActivity;
 import com.prathamesh.codebucket.Convertor.ConvertorActivity;
+import com.prathamesh.codebucket.Explainer.ExplainerActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -38,6 +39,10 @@ public class HomeActivity extends AppCompatActivity {
 
         Card_Code_Convertor.setOnClickListener(view -> {
             startActivity(new Intent(HomeActivity.this, ConvertorActivity.class));
+        });
+
+        Card_Explain.setOnClickListener(view -> {
+            startActivity(new Intent(HomeActivity.this, ExplainerActivity.class));
         });
     }
 }

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/RL_Explainer"
+    tools:context=".Explainer.ExplainerActivity">
+    
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:id="@+id/Appbar_Explainer"
+        android:layout_height="?android:attr/actionBarSize">
+
+        <TextView
+            android:id="@+id/Convertor_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/alegreya_sc_bold"
+            android:gravity="center"
+            android:minHeight="?actionBarSize"
+            android:text="Explainer"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+        
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/TBL_Explainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Appbar_Explainer" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/ViewPager_Explainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/TBL_Explainer" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/FAB_Explain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="30dp"
+        android:backgroundTint="#3965FF"
+        android:fontFamily="@font/cascadia"
+        android:text="Explain"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:icon="@drawable/icon_explain_btn"
+        app:iconSize="35dp" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/FAB_Listen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="30dp"
+        android:backgroundTint="#3965FF"
+        android:fontFamily="@font/cascadia"
+        android:text="Listen"
+        android:textAllCaps="false"
+        android:gravity="center"
+        android:textSize="18sp"
+        app:iconSize="35dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:src="@drawable/icon_play"
+        android:id="@+id/FAB_Explain_Play"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="120dp"
+        app:borderWidth="0dp"
+        app:fabCustomSize="60dp"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:src="@drawable/icon_stop"
+        android:id="@+id/FAB_Explain_Stop"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/red"
+        android:layout_marginBottom="190dp"
+        app:borderWidth="0dp"
+        android:visibility="invisible"
+        app:fabCustomSize="60dp"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
