@@ -6,6 +6,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -49,6 +51,7 @@ public class ConvertorActivity extends AppCompatActivity {
     String languageKey = "";
     String code = "";
     RelativeLayout relativeLayout;
+    String API_KEY;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -64,6 +67,13 @@ public class ConvertorActivity extends AppCompatActivity {
         spinner = findViewById(R.id.Convertor_Spinner);
         customLoader = new CustomLoader();
 
+        try {
+            ApplicationInfo applicationInfo = getApplicationContext().getPackageManager().getApplicationInfo(getApplicationContext().getPackageName(), PackageManager.GET_META_DATA);
+            Object temp = applicationInfo.metaData.get("API_KEY");
+            API_KEY = temp.toString();
+        } catch (PackageManager.NameNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         FAB_Copy.setVisibility(View.GONE);
 
@@ -223,8 +233,7 @@ public class ConvertorActivity extends AppCompatActivity {
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<>();
                     headers.put("Content-Type", "application/json");
-                    String key = "Bearer " + Constants.API_KEY;
-                    headers.put("Authorization", key);
+                    headers.put("Authorization", API_KEY);
                     return headers;
                 }
             };

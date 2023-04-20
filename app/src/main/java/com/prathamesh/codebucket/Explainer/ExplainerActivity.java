@@ -3,8 +3,12 @@ package com.prathamesh.codebucket.Explainer;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.media.AudioAttributes;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -15,6 +19,7 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -33,6 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class ExplainerActivity extends AppCompatActivity {
@@ -47,6 +53,11 @@ public class ExplainerActivity extends AppCompatActivity {
     TabLayout tabLayout;
     CustomLoader customLoader;
     RelativeLayout relativeLayout;
+    TextToSpeech textToSpeech;
+
+    String explanation;
+
+    String API_KEY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +83,13 @@ public class ExplainerActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         fabAnimationExplain();
 
+        try {
+            ApplicationInfo applicationInfo = getApplicationContext().getPackageManager().getApplicationInfo(getApplicationContext().getPackageName(), PackageManager.GET_META_DATA);
+            Object temp = applicationInfo.metaData.get("API_KEY");
+            API_KEY = temp.toString();
+        } catch (PackageManager.NameNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         // viewpager setup
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -82,22 +100,23 @@ public class ExplainerActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 1){
+                if (position == 1) {
                     FAB_Explain.setVisibility(View.GONE);
                     FAB_Listen.setVisibility(View.VISIBLE);
                     tabLayout.getTabAt(1).removeBadge();
                     fabAnimationListen();
-                }else{
+                } else {
                     FAB_Listen.setVisibility(View.GONE);
                     FAB_Explain.setVisibility(View.VISIBLE);
                     fabAnimationExplain();
-                    if (isFabListenOpen){
+                    if (isFabListenOpen) {
                         FAB_Play.startAnimation(fabClose);
                         FAB_Stop.startAnimation(fabClose);
                         FAB_Play.setClickable(false);
                         FAB_Stop.setClickable(false);
                         FAB_Listen.setIcon(getDrawable(R.drawable.icon_speaker));
                         isFabListenOpen = false;
+                        stopReading();
                     }
                 }
             }
@@ -116,27 +135,47 @@ public class ExplainerActivity extends AppCompatActivity {
         FAB_Listen.setOnClickListener(view -> {
             animateFab();
         });
-        
+
         FAB_Play.setOnClickListener(view -> {
-            Toast.makeText(this, "Play", Toast.LENGTH_SHORT).show();
+
+            if (explanation.isEmpty())
+                Toast.makeText(this, "Nothing to read...", Toast.LENGTH_SHORT).show();
+            else {
+                textToSpeech = new TextToSpeech(ExplainerActivity.this, new TextToSpeech.OnInitListener() {
+                    @Override
+                    public void onInit(int i) {
+                        if (i == TextToSpeech.SUCCESS) {
+                            textToSpeech.setLanguage(Locale.ENGLISH);
+                            textToSpeech.speak(explanation, TextToSpeech.QUEUE_FLUSH, null, null);
+
+                            Toast.makeText(getApplicationContext(), "Reading...", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+
+            }
+
         });
-        
+
         FAB_Stop.setOnClickListener(view -> {
-            Toast.makeText(this, "Stop", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Reading Stopped...", Toast.LENGTH_SHORT).show();
+            stopReading();
         });
 
 
     }
 
-    private void animateFab(){
-        if (isFabListenOpen){
+    private void animateFab() {
+        if (isFabListenOpen) {
             FAB_Play.startAnimation(fabClose);
             FAB_Stop.startAnimation(fabClose);
             FAB_Play.setClickable(false);
             FAB_Stop.setClickable(false);
             FAB_Listen.setIcon(getDrawable(R.drawable.icon_speaker));
             isFabListenOpen = false;
-        }else {
+        } else {
 
             FAB_Play.startAnimation(fabOpen);
             FAB_Stop.startAnimation(fabOpen);
@@ -147,12 +186,12 @@ public class ExplainerActivity extends AppCompatActivity {
         }
     }
 
-    public void explain(String code){
+    public void explain(String code) {
         if (code.isEmpty())
             showSnackBar("Please write some code...!");
-        else{
-            customLoader.showCustomLoader(this,"Generating...");
-            String prompt = "##### explain this code step by step in detail ###\n" + code +"\n###";
+        else {
+            customLoader.showCustomLoader(this, "Generating...");
+            String prompt = "##### explain this code step by step in detail ###\n" + code + "\n###";
 
             JSONObject payload = new JSONObject();
             JSONArray jsonArray = new JSONArray();
@@ -179,7 +218,7 @@ public class ExplainerActivity extends AppCompatActivity {
                     try {
                         jsonArrayResponse = response.getJSONArray("choices");
                         JSONObject res = jsonArrayResponse.getJSONObject(0);
-                        String explanation = res.getString("text");
+                        explanation = res.getString("text");
                         setExplanationToOutputScreen(explanation);
                         tabLayout.getTabAt(1).getOrCreateBadge().setNumber(1);
                         customLoader.dismissCustomLoader();
@@ -194,18 +233,34 @@ public class ExplainerActivity extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
                     customLoader.dismissCustomLoader();
                     Toast.makeText(ExplainerActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
-                    Log.d("PRATHAMESHADATE",error.toString());
+                    Log.d("PRATHAMESHADATE", error.toString());
                 }
-            }){
+            }) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<>();
                     headers.put("Content-Type", "application/json");
-                    String key = "Bearer " + Constants.API_KEY;
-                    headers.put("Authorization", key);
+                    headers.put("Authorization", API_KEY);
                     return headers;
                 }
             };
+
+            jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
+                @Override
+                public int getCurrentTimeout() {
+                    return 10000;
+                }
+
+                @Override
+                public int getCurrentRetryCount() {
+                    return 10000;
+                }
+
+                @Override
+                public void retry(VolleyError error) throws VolleyError {
+
+                }
+            });
 
             SingletonAPI.getInstance(this).addToRequestQueue(jsonObjectRequest);
         }
@@ -221,6 +276,7 @@ public class ExplainerActivity extends AppCompatActivity {
             }
         }, 3000);
     }
+
     private void fabAnimationListen() {
         FAB_Listen.extend();
 
@@ -243,5 +299,20 @@ public class ExplainerActivity extends AppCompatActivity {
         bundle.putString("explanation", explanation);
         explainerOutputFragment.setArguments(bundle);
         Log.d("PRATHAMESHADATE", "code setted");
+    }
+
+    @Override
+    protected void onPause() {
+        textToSpeech.stop();
+        textToSpeech.shutdown();
+        super.onPause();
+    }
+
+    // it stop the text to speech function
+    private void stopReading() {
+        if (textToSpeech.isSpeaking()) {
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
     }
 }

@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -49,4 +50,5 @@ dependencies {
 
     // editor languages
     implementation 'io.github.Rosemoe.sora-editor:language-java:0.8.4'
+
 }
