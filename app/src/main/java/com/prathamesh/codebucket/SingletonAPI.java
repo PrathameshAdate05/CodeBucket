@@ -12,24 +12,24 @@ public class SingletonAPI {
     private RequestQueue requestQueue;
     private static Context context;
 
-    SingletonAPI(Context con){
+    SingletonAPI(Context con) {
         context = con;
         requestQueue = getRequestQueue();
     }
 
     private RequestQueue getRequestQueue() {
-        if (requestQueue == null){
-            requestQueue =  Volley.newRequestQueue(context.getApplicationContext());
+        if (requestQueue == null) {
+            requestQueue = Volley.newRequestQueue(context.getApplicationContext());
         }
 
         return requestQueue;
     }
 
-    public <T> void addToRequestQueue(Request<T> request){
+    public <T> void addToRequestQueue(Request<T> request) {
         getRequestQueue().add(request);
     }
 
-    public static synchronized SingletonAPI getInstance(Context con){
+    public static synchronized SingletonAPI getInstance(Context con) {
         if (singletonAPI == null)
             singletonAPI = new SingletonAPI(con);
 

@@ -5,7 +5,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.media.AudioAttributes;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
@@ -28,7 +27,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.prathamesh.codebucket.Adapter.ExplainerViewPagerAdapter;
 import com.prathamesh.codebucket.Constants;
-import com.prathamesh.codebucket.Convertor.ConvertorOutputFragment;
 import com.prathamesh.codebucket.Loader.CustomLoader;
 import com.prathamesh.codebucket.R;
 import com.prathamesh.codebucket.SingletonAPI;
@@ -152,9 +150,6 @@ public class ExplainerActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
-
             }
 
         });
@@ -163,8 +158,6 @@ public class ExplainerActivity extends AppCompatActivity {
             Toast.makeText(this, "Reading Stopped...", Toast.LENGTH_SHORT).show();
             stopReading();
         });
-
-
     }
 
     private void animateFab() {

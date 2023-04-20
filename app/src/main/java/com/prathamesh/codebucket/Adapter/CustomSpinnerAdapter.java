@@ -42,7 +42,7 @@ public class CustomSpinnerAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = layoutInflater.inflate(R.layout.custom_spinner_layout,null);
+        view = layoutInflater.inflate(R.layout.custom_spinner_layout, null);
         ImageView imageView = view.findViewById(R.id.IVSpinner);
         TextView textView = view.findViewById(R.id.TVSpinner);
         imageView.setImageResource(icons[i]);

@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RL_Explainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/RL_Explainer"
     tools:context=".Explainer.ExplainerActivity">
-    
+
     <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
         android:id="@+id/Appbar_Explainer"
+        android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize">
 
         <TextView
@@ -23,7 +23,7 @@
             android:text="Explainer"
             android:textColor="@color/black"
             android:textSize="25sp" />
-        
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.tabs.TabLayout
@@ -62,36 +62,37 @@
         android:layout_margin="30dp"
         android:backgroundTint="#3965FF"
         android:fontFamily="@font/cascadia"
+        android:gravity="center"
         android:text="Listen"
         android:textAllCaps="false"
-        android:gravity="center"
         android:textSize="18sp"
         app:iconSize="35dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:src="@drawable/icon_play"
         android:id="@+id/FAB_Explain_Play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="120dp"
-        app:borderWidth="0dp"
-        app:fabCustomSize="60dp"
+        android:src="@drawable/icon_play"
         android:visibility="invisible"
-        android:layout_height="wrap_content"/>
+        app:borderWidth="0dp"
+        app:fabCustomSize="60dp" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:src="@drawable/icon_stop"
         android:id="@+id/FAB_Explain_Stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="30dp"
-        android:backgroundTint="@color/red"
         android:layout_marginBottom="190dp"
-        app:borderWidth="0dp"
+        android:backgroundTint="@color/red"
+        android:src="@drawable/icon_stop"
         android:visibility="invisible"
-        app:fabCustomSize="60dp"
-        android:layout_height="wrap_content"/>
+        app:borderWidth="0dp"
+        app:fabCustomSize="60dp" />
 
 </RelativeLayout>

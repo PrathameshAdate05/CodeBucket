@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/gradient"
+    android:orientation="vertical"
     tools:context=".HomeActivity">
 
     <TextView
@@ -21,78 +21,79 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@drawable/quote_bg"
-        android:layout_marginEnd="20dp"
-        android:orientation="vertical"
-        android:elevation="10dp"
+        android:layout_height="130dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/quote_bg"
+        android:elevation="10dp"
         android:gravity="center"
-        android:layout_height="130dp">
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_marginStart="10dp"
-            android:textSize="20dp"
             android:id="@+id/TV_Quote"
-            android:paddingEnd="20dp"
-            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/cascadia"
+            android:gravity="center_vertical"
+            android:paddingEnd="20dp"
             android:textColor="@color/white"
-            android:layout_height="match_parent"/>
+            android:textSize="20dp" />
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:background="@drawable/top_round_bg"
         android:layout_marginTop="20dp"
+        android:background="@drawable/top_round_bg"
         android:orientation="vertical"
-        android:paddingBottom="20dp"
-        android:layout_height="wrap_content">
+        android:paddingBottom="20dp">
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="30dp"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="6dp"
             android:id="@+id/CARD_Compiler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
             android:clickable="true"
             android:focusable="true"
-            android:layout_height="wrap_content">
+            app:cardCornerRadius="30dp"
+            app:cardElevation="6dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_margin="20dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:src="@drawable/icon_compiler"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_compiler" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center_vertical"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="20dp"
-                    android:layout_height="match_parent">
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/cascadia_bold"
                         android:text="Compiler"
-                        android:fontFamily="@font/cascadia_bold"
-                        android:textSize="20sp"
                         android:textColor="@color/black"
-                        android:layout_height="wrap_content"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/cascadia"
                         android:text="Executes your code."
-                        android:fontFamily="@font/cascadia"
-                        android:textSize="15sp"
-                        android:layout_marginTop="5dp"
-                        android:layout_height="wrap_content"/>
+                        android:textSize="15sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -100,47 +101,48 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="30dp"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="6dp"
             android:id="@+id/CARD_Transpile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
             android:clickable="true"
             android:focusable="true"
-            android:layout_height="wrap_content">
+            app:cardCornerRadius="30dp"
+            app:cardElevation="6dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_margin="20dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:src="@drawable/icon_translate"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_translate" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center_vertical"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="20dp"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:text="Transpile"
-                        android:fontFamily="@font/cascadia_bold"
-                        android:textSize="20sp"
-                        android:textColor="@color/black"
-                        android:layout_height="wrap_content"/>
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:text="Converts your code."
-                        android:fontFamily="@font/cascadia"
-                        android:textSize="15sp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/cascadia_bold"
+                        android:text="Transpile"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:layout_height="wrap_content"/>
+                        android:fontFamily="@font/cascadia"
+                        android:text="Converts your code."
+                        android:textSize="15sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -148,48 +150,49 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/CARD_Explain"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="30dp"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="6dp"
-            android:id="@+id/CARD_Explain"
+            android:layout_marginBottom="10dp"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginBottom="10dp"
-            android:layout_height="wrap_content">
+            app:cardCornerRadius="30dp"
+            app:cardElevation="6dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_margin="20dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:src="@drawable/icon_explain"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_explain" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center_vertical"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="20dp"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:text="Explainer"
-                        android:fontFamily="@font/cascadia_bold"
-                        android:textSize="20sp"
-                        android:textColor="@color/black"
-                        android:layout_height="wrap_content"/>
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:text="Expalins your code."
-                        android:fontFamily="@font/cascadia"
-                        android:textSize="15sp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/cascadia_bold"
+                        android:text="Explainer"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:layout_height="wrap_content"/>
+                        android:fontFamily="@font/cascadia"
+                        android:text="Expalins your code."
+                        android:textSize="15sp" />
                 </LinearLayout>
 
             </LinearLayout>

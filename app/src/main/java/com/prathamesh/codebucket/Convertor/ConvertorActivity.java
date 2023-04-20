@@ -129,14 +129,14 @@ public class ConvertorActivity extends AppCompatActivity {
 
         // listener for copy button
         FAB_Copy.setOnClickListener(view -> {
-            if (!code.equals("")){
+            if (!code.equals("")) {
                 ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
                 ClipData clipData = ClipData.newPlainText("CodeBucket", code);
                 clipboardManager.setPrimaryClip(clipData);
                 Toast.makeText(this, "Code Copied", Toast.LENGTH_SHORT).show();
-            }else
+            } else
                 Toast.makeText(this, "Nothing to copy...", Toast.LENGTH_SHORT).show();
-           
+
         });
 
     }

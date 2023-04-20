@@ -1,8 +1,5 @@
 package com.prathamesh.codebucket.Convertor;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -12,9 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.prathamesh.codebucket.R;
 
 import io.github.rosemoe.sora.langs.java.JavaLanguage;
@@ -24,6 +18,7 @@ public class ConvertorOutputFragment extends Fragment {
 
     CodeEditor codeEditor;
     String code = "";
+
     public ConvertorOutputFragment() {
         // Required empty public constructor
     }
@@ -32,7 +27,7 @@ public class ConvertorOutputFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null){
+        if (getArguments() != null) {
             code = getArguments().getString("code");
         }
     }
@@ -49,7 +44,7 @@ public class ConvertorOutputFragment extends Fragment {
         if (!code.equals(""))
             codeEditor.setText(code);
         else
-            Log.d("PRATHAMESHADATE","empty");
+            Log.d("PRATHAMESHADATE", "empty");
 
         return root;
     }

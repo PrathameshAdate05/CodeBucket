@@ -18,6 +18,7 @@ import io.github.rosemoe.sora.widget.CodeEditor;
 public class ExplainerCodeFragment extends Fragment {
 
     CodeEditor codeEditor;
+
     public ExplainerCodeFragment() {
         // Required empty public constructor
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/FL_Compiler_Code"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/FL_Compiler_Code"
     tools:context=".Compiler.CompilerCodeFragment">
 
     <io.github.rosemoe.sora.widget.CodeEditor
