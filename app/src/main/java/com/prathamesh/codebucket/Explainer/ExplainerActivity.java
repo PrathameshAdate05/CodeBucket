@@ -53,7 +53,7 @@ public class ExplainerActivity extends AppCompatActivity {
     RelativeLayout relativeLayout;
     TextToSpeech textToSpeech;
 
-    String explanation;
+    String explanation = "";
 
     String API_KEY;
 
