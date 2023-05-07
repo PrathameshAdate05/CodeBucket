@@ -5,25 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/splash_bg_gradient"
     tools:context=".SplashActivity">
 
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animation_view"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/splash_bg" />
+        android:src="@drawable/splash_icon"
+        android:layout_marginHorizontal="30dp"
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="@font/aladin"
         android:text="@string/app_name"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="50sp" />
 
     <TextView
@@ -33,6 +32,7 @@
         android:fontFamily="@font/cascadia"
         android:text="@string/tagline"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="20sp" />
 
 </LinearLayout>

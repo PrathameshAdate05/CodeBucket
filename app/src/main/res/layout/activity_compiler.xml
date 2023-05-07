@@ -10,6 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/AppBar_Compiler"
         android:layout_width="match_parent"
+        android:background="#234FED"
         android:layout_height="?android:attr/actionBarSize">
 
         <RelativeLayout
@@ -21,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:fontFamily="@font/alegreya_sc_bold"
+                android:fontFamily="@font/arsenal_bold"
                 android:gravity="center"
                 android:minHeight="?actionBarSize"
                 android:text="Compiler"
