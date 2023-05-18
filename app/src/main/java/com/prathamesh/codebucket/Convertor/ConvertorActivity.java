@@ -6,8 +6,10 @@ import androidx.viewpager.widget.ViewPager;
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -30,6 +32,7 @@ import com.prathamesh.codebucket.Adapter.ConvertorViewPagerAdapter;
 import com.prathamesh.codebucket.Adapter.CustomSpinnerAdapter;
 import com.prathamesh.codebucket.Constants;
 import com.prathamesh.codebucket.Loader.CustomLoader;
+import com.prathamesh.codebucket.Loader.CustomSuccessAnimation;
 import com.prathamesh.codebucket.R;
 import com.prathamesh.codebucket.SingletonAPI;
 
@@ -53,6 +56,8 @@ public class ConvertorActivity extends AppCompatActivity {
     RelativeLayout relativeLayout;
     String API_KEY;
 
+    CustomSuccessAnimation customSuccessAnimation;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +71,7 @@ public class ConvertorActivity extends AppCompatActivity {
         FAB_Copy = findViewById(R.id.FAB_Convertor_Copy);
         spinner = findViewById(R.id.Convertor_Spinner);
         customLoader = new CustomLoader();
+        customSuccessAnimation = new CustomSuccessAnimation();
 
         try {
             ApplicationInfo applicationInfo = getApplicationContext().getPackageManager().getApplicationInfo(getApplicationContext().getPackageName(), PackageManager.GET_META_DATA);
@@ -164,9 +170,16 @@ public class ConvertorActivity extends AppCompatActivity {
 
     // main method which send a request to server for converting code
     public void convertCode(String inputCode) {
+
+        if (!isNetworkAvailable(ConvertorActivity.this)){
+            showSnackBar("Please check your connection and Retry...");
+            return;
+        }
+        
         if (inputCode.isEmpty()) {
             showSnackBar("Please write some code...!");
-        } else {
+        }
+        else {
             customLoader.showCustomLoader(this, "Converting...");
             JSONObject payload = new JSONObject();
             JSONArray jsonArray = new JSONArray();
@@ -218,6 +231,15 @@ public class ConvertorActivity extends AppCompatActivity {
                         setCodeToOutputScreen(code);
                         tabLayout.getTabAt(1).getOrCreateBadge().setNumber(1);
                         customLoader.dismissCustomLoader();
+
+                        // custom success animation
+                        customSuccessAnimation.showAnimation(ConvertorActivity.this);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                customSuccessAnimation.dismissAnimation();
+                            }
+                        }, 2000);
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
@@ -227,6 +249,7 @@ public class ConvertorActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     customLoader.dismissCustomLoader();
+                    Toast.makeText(ConvertorActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
                 }
             }) {
                 @Override
@@ -248,5 +271,8 @@ public class ConvertorActivity extends AppCompatActivity {
         Snackbar.make(relativeLayout, message, Snackbar.LENGTH_LONG).show();
     }
 
-
+    public boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+    }
 }

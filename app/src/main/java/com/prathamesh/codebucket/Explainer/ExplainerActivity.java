@@ -3,8 +3,10 @@ package com.prathamesh.codebucket.Explainer;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
@@ -28,6 +30,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.prathamesh.codebucket.Adapter.ExplainerViewPagerAdapter;
 import com.prathamesh.codebucket.Constants;
 import com.prathamesh.codebucket.Loader.CustomLoader;
+import com.prathamesh.codebucket.Loader.CustomSuccessAnimation;
 import com.prathamesh.codebucket.R;
 import com.prathamesh.codebucket.SingletonAPI;
 
@@ -56,6 +59,7 @@ public class ExplainerActivity extends AppCompatActivity {
     String explanation = "";
 
     String API_KEY;
+    CustomSuccessAnimation customSuccessAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +78,8 @@ public class ExplainerActivity extends AppCompatActivity {
 
         FAB_Listen.setVisibility(View.GONE);
         FAB_Listen.setIconResource(R.drawable.icon_speaker);
+
+        customSuccessAnimation = new CustomSuccessAnimation();
 
         // tablayout setup
         ExplainerViewPagerAdapter explainerViewPagerAdapter = new ExplainerViewPagerAdapter(getSupportFragmentManager());
@@ -180,6 +186,12 @@ public class ExplainerActivity extends AppCompatActivity {
     }
 
     public void explain(String code) {
+
+        if (!isNetworkAvailable(ExplainerActivity.this)){
+            showSnackBar("Please check your connection and Retry...");
+            return;
+        }
+
         if (code.isEmpty())
             showSnackBar("Please write some code...!");
         else {
@@ -216,6 +228,13 @@ public class ExplainerActivity extends AppCompatActivity {
                         tabLayout.getTabAt(1).getOrCreateBadge().setNumber(1);
                         customLoader.dismissCustomLoader();
                         Log.d("PRATHAMESHADATE", explanation);
+                        customSuccessAnimation.showAnimation(ExplainerActivity.this);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                customSuccessAnimation.dismissAnimation();
+                            }
+                        }, 2000);
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
@@ -307,5 +326,10 @@ public class ExplainerActivity extends AppCompatActivity {
             textToSpeech.stop();
             textToSpeech.shutdown();
         }
+    }
+
+    public boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 }

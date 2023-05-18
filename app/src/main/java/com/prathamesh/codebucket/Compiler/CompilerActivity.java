@@ -6,7 +6,9 @@ import androidx.viewpager.widget.ViewPager;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.usage.ConfigurationStats;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -32,6 +34,7 @@ import com.prathamesh.codebucket.Adapter.CompilerViewPagerAdapter;
 import com.prathamesh.codebucket.Adapter.CustomSpinnerAdapter;
 import com.prathamesh.codebucket.Constants;
 import com.prathamesh.codebucket.Loader.CustomLoader;
+import com.prathamesh.codebucket.Loader.CustomSuccessAnimation;
 import com.prathamesh.codebucket.R;
 import com.prathamesh.codebucket.SingletonAPI;
 
@@ -48,6 +51,8 @@ public class CompilerActivity extends AppCompatActivity {
     String languageKey = "";
     CustomLoader customLoader;
 
+    CustomSuccessAnimation customSuccessAnimation;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,7 @@ public class CompilerActivity extends AppCompatActivity {
         relativeLayout = findViewById(R.id.RL_Compiler);
         spinner = findViewById(R.id.Compiler_Spinner);
         customLoader = new CustomLoader();
+        customSuccessAnimation = new CustomSuccessAnimation();
 
         CompilerViewPagerAdapter compilerViewPagerAdapter = new CompilerViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(compilerViewPagerAdapter);
@@ -168,6 +174,16 @@ public class CompilerActivity extends AppCompatActivity {
                     }
                     tabLayout.getTabAt(1).getOrCreateBadge().setNumber(1);
                     customLoader.dismissCustomLoader();
+
+                    // custom success animation
+                    customSuccessAnimation.showAnimation(CompilerActivity.this);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            customSuccessAnimation.dismissAnimation();
+                        }
+                    }, 2000);
+
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -177,6 +193,7 @@ public class CompilerActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 customLoader.dismissCustomLoader();
+                Toast.makeText(CompilerActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -192,6 +209,11 @@ public class CompilerActivity extends AppCompatActivity {
     }
 
     public void showInputDialog(String code) {
+
+        if (!isNetworkAvailable(CompilerActivity.this)){
+            showSnackBar("Please check your connection and Retry...");
+            return;
+        }
 
         if (code.isEmpty())
             showSnackBar("Please write some code...!");
@@ -213,5 +235,10 @@ public class CompilerActivity extends AppCompatActivity {
             AlertDialog showDialog = alertDialog.create();
             showDialog.show();
         }
+    }
+
+    public boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 }
